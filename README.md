@@ -18,18 +18,31 @@ pip install forstate
 
 ## Usage
 
-1. Import the `for_state` decorator and, if needed, the `ANY_STATE`
-   sentinel to accommodate fallback methods.
+- Import the `for_state` decorator and, if needed, the `ANY_STATE`
+  marker.
 
-2. Decorate your class methods with `@for_state`, specifying the
-   relevant state names for each method. This enables you to define
-   distinct behaviors for the same method name based on the object's
-   current state.
+- Decorate your class methods with `@for_state`, specifying the
+  relevant state names for each method. This enables you to define
+  distinct behaviors for the same method name based on the object's
+  current state.
 
-3. Utilize the `ANY_STATE` marker to designate fallback methods that
-   will be invoked when no specific version of a method is defined for
-   the current state.
+  For instance:
 
+  ```python
+  @for_state("state1")
+  def foo(self, arg):
+      # Implementation for state1
+      pass
+
+  @for_state("state2", "state3")
+  def foo(self, arg):
+      # Implementation for state2 and state3
+      pass
+  ```
+
+- Utilize the `ANY_STATE` marker to designate fallback methods that
+  will be invoked when no specific version of a method is defined for
+  the current state.
 
 ### Example
 
@@ -44,7 +57,7 @@ class MyStatefulObject:
     def action(self):
         print("Action for state 1")
 
-    @for_state("state2")
+    @for_state("state2", "state3")
     def action(self):
         print("Action for state 2")
 
