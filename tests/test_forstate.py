@@ -51,5 +51,15 @@ class TestForStateDecorator(unittest.TestCase):
         with self.assertRaises(AttributeError):
             self.obj.action()
 
+    def test_mixed_for_and_without_state(self):
+        with self.assertRaises(RuntimeError):
+            class C:
+                def foo(self):
+                    return 1
+
+                @for_state("state1")
+                def foo(self):
+                    return 2
+
 if __name__ == '__main__':
     unittest.main()
