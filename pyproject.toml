@@ -7,8 +7,9 @@ name = "forstate"
 authors = [{name = "Salvador Fandiño", email = "sfandino@yahoo.com"}]
 license = {file = "LICENSE"}
 classifiers = ["License :: OSI Approved :: MIT License"]
-version = "0.0.1"
+version = "0.0.2"
 description = "Dispatch methods according to a state value"
+readme = "README.md"
 
 [project.urls]
 Home = "http://github.com/salva/py-forstate"
