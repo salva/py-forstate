@@ -7,7 +7,12 @@ name = "forstate"
 authors = [{name = "Salvador Fandiño", email = "sfandino@yahoo.com"}]
 license = {file = "LICENSE"}
 classifiers = ["License :: OSI Approved :: MIT License"]
-dynamic = ["version", "description"]
+version = "0.0.1"
+description = "Dispatch methods according to a state value"
 
 [project.urls]
 Home = "http://github.com/salva/py-forstate"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
