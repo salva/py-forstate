@@ -12,7 +12,7 @@ class AnySentinel:
         return "<ANY_STATE>"
 ANY_STATE = AnySentinel()
 
-def for_state(state_name):
+def for_state(state_name, *more_names):
     """A decorator to associate methods with specific states for stateful objects.
 
     This decorator allows you to define multiple methods with the same name,
@@ -70,7 +70,7 @@ def for_state(state_name):
 
         method_name = func.__name__
         if (wrapper := f.f_locals.get(method_name)) is None:
-            dispatch_table = {state_name: func}
+            dispatch_table = {}
             def wrapper(self, *args, **kwargs):
                 try:
                     method = dispatch_table[self._state]
@@ -97,6 +97,8 @@ def for_state(state_name):
                 except:
                     pass
                 raise RuntimeError(f"Method {method_name} previously declared without @for_state decorator{previous_location}.")
-            dispatch_table[state_name] = func
+        dispatch_table[state_name] = func
+        for state in more_names:
+            dispatch_table[state] = func
         return wrapper
     return decorator
